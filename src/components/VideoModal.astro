@@ -1,0 +1,120 @@
+---
+const showreelUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+---
+
+<div class="modal" id="video-modal" hidden>
+	<div class="modal-backdrop" data-close></div>
+	<div class="modal-dialog" role="dialog" aria-modal="true" aria-label="Video player">
+		<button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
+		<div class="modal-body">
+			<iframe
+				id="modal-iframe"
+				src=""
+				title="Video"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen
+			></iframe>
+		</div>
+	</div>
+</div>
+
+<script define:vars={{ showreelUrl }}>
+	const modal = document.getElementById('video-modal');
+	const iframe = document.getElementById('modal-iframe');
+
+	function openModal(url) {
+		if (!modal || !iframe) return;
+		iframe.src = url + '?autoplay=1';
+		modal.hidden = false;
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeModal() {
+		if (!modal || !iframe) return;
+		modal.hidden = true;
+		iframe.src = '';
+		document.body.style.overflow = '';
+	}
+
+	modal?.querySelectorAll('[data-close]').forEach((el) => {
+		el.addEventListener('click', closeModal);
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeModal();
+	});
+
+	document.querySelectorAll('.grid-item').forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const url = btn.getAttribute('data-video');
+			if (url) openModal(url);
+		});
+	});
+
+	document.getElementById('showreel-btn')?.addEventListener('click', () => {
+		openModal(showreelUrl);
+	});
+</script>
+
+<style>
+	.modal[hidden] {
+		display: none;
+	}
+
+	.modal {
+		position: fixed;
+		inset: 0;
+		z-index: 200;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.5rem;
+	}
+
+	.modal-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.8);
+	}
+
+	.modal-dialog {
+		position: relative;
+		width: min(900px, 100%);
+		z-index: 1;
+	}
+
+	.modal-close {
+		position: absolute;
+		top: -2.5rem;
+		right: 0;
+		background: none;
+		border: none;
+		color: #ffffff;
+		font-size: 2rem;
+		line-height: 1;
+		padding: 0;
+		opacity: 0.8;
+		transition: opacity 0.2s;
+	}
+
+	.modal-close:hover {
+		opacity: 1;
+	}
+
+	.modal-body {
+		position: relative;
+		padding-bottom: 56.25%;
+		height: 0;
+		background: #000;
+		border-radius: 4px;
+		overflow: hidden;
+	}
+
+	.modal-body iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+	}
+</style>

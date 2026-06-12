@@ -1,0 +1,63 @@
+---
+const artists = [
+	{ name: 'Apex Breaks', location: 'Canada', photo: '/images/apex breaks.jpg' },
+	{ name: 'Vortexistent', location: 'Romania', photo: '/images/vortexistent.jpg' },
+	{ name: 'Jennifer Misura', location: 'Canada', photo: '/images/Olson Music.avif' },
+	{ name: 'The Relocators', location: 'Berlin', photo: '/images/The relocators.jpg' },
+	{ name: 'Evaride', location: 'Toronto', photo: '/images/Evaride.jpg' },
+	
+];
+---
+
+<section class="clients section" id="clients">
+	<div class="container">
+		<div class="section-heading">
+			<h2>Artists I've Worked With</h2>
+			<span class="underline"></span>
+		</div>
+
+		<div class="artist-row">
+			{artists.map((artist) => (
+				<div class="artist">
+					<img src={artist.photo} alt={artist.name} width="100" height="100" loading="lazy" />
+					<p class="artist-name">{artist.name}</p>
+					<p class="artist-location">{artist.location}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.artist-row {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 2.5rem 3rem;
+	}
+
+	.artist {
+		text-align: center;
+		width: 120px;
+	}
+
+	.artist img {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		object-fit: cover;
+		margin: 0 auto 0.75rem;
+	}
+
+	.artist-name {
+		font-size: 0.85rem;
+		font-weight: 600;
+		margin: 0 0 0.15rem;
+	}
+
+	.artist-location {
+		font-size: 0.75rem;
+		color: var(--color-muted);
+		margin: 0;
+	}
+</style>

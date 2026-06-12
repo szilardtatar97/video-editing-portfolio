@@ -1,0 +1,98 @@
+---
+---
+
+<section class="about section" id="about">
+	<div class="container">
+		<div class="section-heading">
+			<h2>About Me</h2>
+			<span class="underline"></span>
+		</div>
+
+		<div class="about-grid">
+			<div class="about-text">
+				<p>
+					I'm Szilard Tatar, a video editor specializing in lyric videos and music
+					videos for independent artists, labels, and creators around the world.
+				</p>
+				<p>
+					With a passion for visual storytelling and rhythm, I help musicians bring
+					their songs to life through clean typography, dynamic motion, and
+					cinematic edits that connect with fans on every platform.
+				</p>
+				<p>
+					Whether you need a lyric video for your next single, a full music video
+					edit, or social-ready vertical cuts — I work closely with you from
+					concept to final delivery.
+				</p>
+				<button class="btn-dark" id="showreel-btn" type="button">
+					Watch Intro Video
+				</button>
+			</div>
+
+			<div class="about-photo">
+				<img
+					src="/images/profile.jpg.jpg"
+					alt="Szilard Tatar"
+					width="320"
+					height="320"
+					loading="lazy"
+				/>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.section {
+		padding: var(--section-pad);
+	}
+
+	.about-grid {
+		display: grid;
+		grid-template-columns: 1fr 280px;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.about-text p {
+		color: var(--color-muted);
+		margin: 0 0 1.25rem;
+	}
+
+	.btn-dark {
+		margin-top: 0.5rem;
+		padding: 0.85rem 1.75rem;
+		background: var(--color-dark);
+		color: #ffffff;
+		border: none;
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		transition: background 0.2s;
+	}
+
+	.btn-dark:hover {
+		background: var(--color-dark-soft);
+	}
+
+	.about-photo img {
+		width: 280px;
+		height: 280px;
+		border-radius: 50%;
+		object-fit: cover;
+		margin: 0 auto;
+		box-shadow: 0 8px 32px rgba(196, 92, 255, 0.15);
+	}
+
+	@media (max-width: 768px) {
+		.about-grid {
+			grid-template-columns: 1fr;
+			text-align: center;
+		}
+
+		.about-photo {
+			order: -1;
+		}
+	}
+</style>

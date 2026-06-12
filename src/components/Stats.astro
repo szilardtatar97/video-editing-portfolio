@@ -1,0 +1,64 @@
+---
+const stats = [
+	{ icon: '✓', value: '80+', label: 'Projects' },
+	{ icon: '♪', value: '15+', label: 'Artists' },
+	{ icon: '◎', value: '10+', label: 'Countries' },
+	{ icon: '★', value: '3', label: 'Years' },
+];
+---
+
+<section class="stats section">
+	<div class="container">
+		<div class="stats-grid">
+			{stats.map((stat) => (
+				<div class="stat">
+					<span class="stat-icon">{stat.icon}</span>
+					<p class="stat-value">{stat.value}</p>
+					<p class="stat-label">{stat.label}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.stats {
+		padding: 3rem 1.5rem;
+	}
+
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 2rem;
+		text-align: center;
+	}
+
+	.stat-icon {
+		display: block;
+		font-size: 1.5rem;
+		color: var(--color-accent);
+		margin-bottom: 0.5rem;
+	}
+
+	.stat-value {
+		font-size: clamp(1.8rem, 4vw, 2.5rem);
+		font-weight: 700;
+		margin: 0 0 0.25rem;
+		line-height: 1;
+	}
+
+	.stat-label {
+		font-size: 0.7rem;
+		font-weight: 500;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	@media (max-width: 600px) {
+		.stats-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

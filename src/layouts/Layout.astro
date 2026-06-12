@@ -1,0 +1,110 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'Szilard Tatar — Lyric & Music Video Production',
+	description = 'Professional lyric video and music video editing for artists worldwide.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--color-bg: #ffffff;
+		--color-dark: #1c1c1e;
+		--color-dark-soft: #2a2a2d;
+		--color-text: #1c1c1e;
+		--color-muted: #888888;
+		--color-light: #f5f5f5;
+		--color-accent:rgb(17, 201, 247);
+		--color-accent-hover:rgb(5, 4, 117);
+		--font: 'Montserrat', system-ui, sans-serif;
+		--max-width: 1100px;
+		--section-pad: 5rem 1.5rem;
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		margin: 0;
+		font-family: var(--font);
+		font-size: 15px;
+		line-height: 1.7;
+		color: var(--color-text);
+		background: var(--color-bg);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	img {
+		max-width: 100%;
+		display: block;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	button {
+		font-family: inherit;
+		cursor: pointer;
+	}
+
+	.section-heading {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.section-heading h2 {
+		font-size: clamp(1.4rem, 3vw, 1.75rem);
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		margin: 0 0 0.75rem;
+	}
+
+	.section-heading .underline {
+		display: block;
+		width: 48px;
+		height: 3px;
+		background: var(--color-accent);
+		margin: 0 auto;
+	}
+
+	.container {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 0 1.5rem;
+	}
+</style>

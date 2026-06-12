@@ -1,0 +1,231 @@
+---
+const basePrice = 200;
+
+const extras = [
+	{
+		id: 'vertical',
+		icon: '📱',
+		title: 'Short Video',
+		description: 'Additional version of your lyric video for TikTok & Reels.',
+		price: 75,
+	},
+	{
+		id: 'canvas',
+		icon: '♫',
+		title: 'Spotify Canvas',
+		description: "Catchy visuals that loop on Spotify's Now Playing screen.",
+		price: 50,
+	},
+	{
+		id: 'rush',
+		icon: '⏱',
+		title: '24-Hour Delivery',
+		description: "Don't miss out on that tight deadline!",
+		price: 100,
+	},
+];
+---
+
+<section class="pricing section" id="pricing">
+	<div class="container">
+		<div class="section-heading">
+			<h2>Lyric Video Pricing</h2>
+			<span class="underline"></span>
+			<p class="subtitle">Customize your lyric video with extras below!</p>
+		</div>
+
+		<div class="pricing-layout">
+			<div class="extras">
+				{extras.map((extra) => (
+					<label class="extra-row">
+						<span class="extra-icon">{extra.icon}</span>
+						<span class="extra-info">
+							<strong>{extra.title}</strong>
+							<span>{extra.description}</span>
+						</span>
+						<span class="toggle">
+							<input
+								type="checkbox"
+								name="extra"
+								data-price={extra.price}
+								id={extra.id}
+							/>
+							<span class="toggle-track"></span>
+						</span>
+					</label>
+				))}
+			</div>
+
+			<div class="estimate-card">
+				<p class="estimate-label">Your estimate</p>
+				<p class="estimate-price">
+					<span id="estimate-value">{basePrice}</span> $
+				</p>
+				<a href="#contact" class="btn-accent">Contact</a>
+				<p class="delivery-note">Delivery Time: 3–5 days</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script define:vars={{ basePrice }}>
+	const checkboxes = document.querySelectorAll('.pricing input[type="checkbox"]');
+	const estimateEl = document.getElementById('estimate-value');
+
+	function updateEstimate() {
+		let total = basePrice;
+		checkboxes.forEach((cb) => {
+			if (cb.checked) total += Number(cb.dataset.price);
+		});
+		if (estimateEl) estimateEl.textContent = String(total);
+	}
+
+	checkboxes.forEach((cb) => cb.addEventListener('change', updateEstimate));
+</script>
+
+<style>
+	.subtitle {
+		margin: 1rem 0 0;
+		color: var(--color-muted);
+		font-size: 0.9rem;
+	}
+
+	.pricing-layout {
+		display: grid;
+		grid-template-columns: 1fr 280px;
+		gap: 3rem;
+		align-items: start;
+	}
+
+	.extras {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.extra-row {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		gap: 1rem;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	.extra-icon {
+		font-size: 1.4rem;
+		color: var(--color-accent);
+		width: 2rem;
+		text-align: center;
+	}
+
+	.extra-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
+	.extra-info strong {
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
+
+	.extra-info span:last-child {
+		font-size: 0.8rem;
+		color: var(--color-muted);
+	}
+
+	.toggle input {
+		position: absolute;
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	.toggle-track {
+		display: block;
+		width: 44px;
+		height: 24px;
+		background: #ddd;
+		border-radius: 12px;
+		position: relative;
+		transition: background 0.2s;
+	}
+
+	.toggle-track::after {
+		content: '';
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		width: 18px;
+		height: 18px;
+		background: #fff;
+		border-radius: 50%;
+		transition: transform 0.2s;
+		box-shadow: 0 1px 3px rgba(53, 47, 47, 0.84);
+	}
+
+	.toggle input:checked + .toggle-track {
+		background: var(--color-accent);
+	}
+
+	.toggle input:checked + .toggle-track::after {
+		transform: translateX(20px);
+	}
+
+	.estimate-card {
+		background: var(--color-light);
+		border-radius: 8px;
+		padding: 2rem;
+		text-align: center;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+		position: sticky;
+		top: 5rem;
+	}
+
+	.estimate-label {
+		font-size: 0.85rem;
+		color: var(--color-muted);
+		margin: 0 0 0.5rem;
+	}
+
+	.estimate-price {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--color-accent);
+		margin: 0 0 1.5rem;
+		line-height: 1;
+	}
+
+	.btn-accent {
+		display: block;
+		padding: 0.9rem 1.5rem;
+		background: var(--color-accent);
+		color:rgb(66, 64, 64);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		border: none;
+		transition: background 0.2s;
+	}
+
+	.btn-accent:hover {
+		background: var(--color-accent-hover);
+	}
+
+	.delivery-note {
+		margin: 1rem 0 0;
+		font-size: 0.78rem;
+		color: var(--color-muted);
+	}
+
+	@media (max-width: 768px) {
+		.pricing-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.estimate-card {
+			position: static;
+		}
+	}
+</style>

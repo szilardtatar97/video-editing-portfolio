@@ -1,0 +1,102 @@
+---
+const steps = [
+	{
+		icon: '💬',
+		title: '1. Get in Touch',
+		description:
+			"Let's discuss your lyric video! Include your music, lyrics, and any extra assets you like.",
+	},
+	{
+		icon: '👍',
+		title: '2. Free Demo',
+		description:
+			"Based on our discussion, I'll produce a short demo for your approval.",
+	},
+	{
+		icon: '💵',
+		title: '3. Payment',
+		description:
+			"Once you approve the demo, I'll send a link where various payment methods are available.",
+	},
+	{
+		icon: '🎬',
+		title: '4. Main Video',
+		description:
+			'After the payment, I can work my magic on the rest of your lyric video.',
+	},
+	{
+		icon: '🔄',
+		title: '5. Final Adjustments',
+		description:
+			'Want to make changes? No problem, I offer free adjustments!',
+	},
+];
+---
+
+<section class="process section" id="process">
+	<div class="container">
+		<div class="section-heading">
+			<h2>The Process</h2>
+			<span class="underline"></span>
+		</div>
+
+		<div class="steps">
+			{steps.map((step) => (
+				<div class="step">
+					<span class="step-icon">{step.icon}</span>
+					<h3>{step.title}</h3>
+					<p>{step.description}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.process {
+		background: var(--color-light);
+	}
+
+	.steps {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 1.5rem;
+	}
+
+	.step {
+		text-align: center;
+	}
+
+	.step-icon {
+		display: block;
+		font-size: 1.6rem;
+		color: var(--color-accent);
+		margin-bottom: 0.75rem;
+	}
+
+	.step h3 {
+		font-size: 0.78rem;
+		font-weight: 600;
+		margin: 0 0 0.6rem;
+		letter-spacing: 0.02em;
+	}
+
+	.step p {
+		font-size: 0.78rem;
+		color: var(--color-muted);
+		margin: 0;
+		line-height: 1.6;
+	}
+
+	@media (max-width: 900px) {
+		.steps {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.steps {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

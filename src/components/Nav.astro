@@ -1,0 +1,104 @@
+---
+const links = [
+	{ label: 'Portfolio', href: '#portfolio' },
+	{ label: 'About', href: '#about' },
+	{ label: 'Pricing', href: '#pricing' },
+	{ label: 'Contact', href: '#contact' },
+];
+---
+
+<nav class="nav" id="nav">
+	<div class="nav-inner">
+		{links.map((link) => (
+			<a href={link.href} class="nav-link" data-section={link.href.slice(1)}>
+				{link.label}
+			</a>
+		))}
+	</div>
+</nav>
+
+<script>
+	const nav = document.getElementById('nav');
+	const links = nav?.querySelectorAll('.nav-link');
+	const sections = ['portfolio', 'about', 'pricing', 'contact', 'hero'];
+
+	function setActive(id: string) {
+		links?.forEach((link) => {
+			link.classList.toggle('active', link.getAttribute('data-section') === id);
+		});
+	}
+
+	function onScroll() {
+		if (!nav) return;
+		nav.classList.toggle('scrolled', window.scrollY > 60);
+
+		const scrollPos = window.scrollY + 120;
+		let current = 'hero';
+
+		for (const id of sections) {
+			const el = document.getElementById(id);
+			if (el && el.offsetTop <= scrollPos) current = id;
+		}
+
+		if (current === 'hero') {
+			links?.forEach((l) => l.classList.remove('active'));
+		} else {
+			setActive(current);
+		}
+	}
+
+	window.addEventListener('scroll', onScroll, { passive: true });
+	onScroll();
+</script>
+
+<style>
+	.nav {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+		background: var(--color-dark);
+		transition: top 0.3s, bottom 0.3s;
+	}
+
+	.nav.scrolled {
+		bottom: auto;
+		top: 0;
+	}
+
+	.nav-inner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: clamp(1rem, 4vw, 2.5rem);
+		padding: 0.9rem 1.5rem;
+	}
+
+	.nav-link {
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: #ffffff;
+		opacity: 0.85;
+		transition: color 0.2s, opacity 0.2s;
+	}
+
+	.nav-link:hover,
+	.nav-link.active {
+		color: var(--color-accent);
+		opacity: 1;
+	}
+
+	@media (max-width: 480px) {
+		.nav-inner {
+			gap: 0.75rem;
+			flex-wrap: wrap;
+		}
+
+		.nav-link {
+			font-size: 0.65rem;
+		}
+	}
+</style>
